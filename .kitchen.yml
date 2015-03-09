@@ -1,0 +1,56 @@
+---
+driver:
+  name: vagrant
+  require_chef_omnibus: 11.16.4
+  customize:
+    memory: 1024
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: server
+    run_list:
+      - recipe[sous_chef::server]
+    attributes:
+        sous_chef: {
+            cookbooks: [
+              {
+                cookbook_name: 'sous_chef',
+                cookbook_url: '',
+                notification: {
+                  email: {
+                    enabled: false,
+                    maintainers_email: 'email@address.com'
+                  },
+                  hipchat: {
+                    enabled: false,
+                    hipchat_room: 'Chef'
+                  }
+                },
+                steps: {
+                    bundle: {
+                        command: 'echo bundle install --path vendor/bundle'
+                    },
+                    rubocop: {
+                        command: 'echo bundle exec rubocop',
+                    },
+                    foodcritic: {
+                        command: 'echo bundle exec foodcritic . -f any',
+                    },
+                    test_kitchen: {
+                        command: 'echo bundle exec kitchen test',
+                    },
+                    upload_cookbook: {
+                        command: 'echo thor version:bump patch
+                        echo rm -rf replace_with_cookbook
+                        echo rsync -avz . ./replace_with_cookbook --exclude replace_with_cookbook
+                        echo knife cookbook upload replace_with_cookbook --cookbook-path . --freeze',
+                    }
+                }
+              }
+            ]
+        }

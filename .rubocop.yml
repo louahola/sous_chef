@@ -1,0 +1,23 @@
+AllCops:
+  Exclude:
+    - 'files/**/*'
+    - 'vendor/**/*'
+
+Style/Next:
+  Enabled: false
+
+# We use this in metadata.rb and the rule in general is questionable
+Style/RescueModifier:
+  Enabled: false
+
+# Increase line length.
+Metrics/LineLength:
+  Max: 160
+
+# Favor explicit over implicit code: don't complain of "redundant returns"
+RedundantReturn:
+  Enabled: false
+
+# Don't require numeric literals to have underscores unless they are 7+ digits
+Style/NumericLiterals:
+  MinDigits: 7
