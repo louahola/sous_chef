@@ -24,7 +24,7 @@ jenkins_plugin 'git' do
   notifies :restart, 'service[jenkins]', :immediately
 end
 
-#TODO: Make hipchat plugin optional?
+# TODO: Make hipchat plugin optional?
 jenkins_plugin 'hipchat' do
   # not_if { File.exist?("/var/lib/jenkins/plugins/hipchat.jpi") }
   notifies :restart, 'service[jenkins]', :immediately
@@ -76,7 +76,7 @@ jenkins_script 'configure admin address' do
     EOH
 end
 
-#TODO: Make hipchat plugin optional?
+# TODO: Make hipchat plugin optional?
 jenkins_script 'configure hipchat notifier' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()

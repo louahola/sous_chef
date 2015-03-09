@@ -104,7 +104,6 @@ default['sous_chef']['gitlab_public_key'] = ''
 ## Gitlab Service Account Credentials
 default['sous_chef']['gitlab_service_account_key'] = ''
 
-
 ## Chef
 default['sous_chef']['chef']['username'] = 'jenkins_cookbook'
 default['sous_chef']['chef']['server_url'] = 'https://chef.server.url.com'
