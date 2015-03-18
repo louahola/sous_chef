@@ -22,11 +22,12 @@ include_recipe 'sous_chef::_base'
 include_recipe 'sous_chef::_plugins'
 
 ## Setup Private Keys
-# Private Deploy Key for Gitlab Clones
-jenkins_private_key_credentials 'cookbook_testing' do
-  id node['sous_chef']['gitlab_credential_id']
-  description 'Cookbook Testing Git Deplpoy Key'
-  private_key node['sous_chef']['gitlab_public_key']
+node['sous_chef']['jenkins_private_key_credentials'].each do |credential|
+  jenkins_private_key_credentials credential['name'] do
+    id credential['id']
+    description credential['description']
+    private_key credential['private_key']
+  end
 end
 
 # Cycle through all the cookbooks and merge with default cookbook setup

@@ -4,6 +4,7 @@
 Vagrant.configure('2') do |config|
   config.vm.box = 'trusty64'
   config.vm.box_url = 'https://vagrantcloud.com/ubuntu/boxes/trusty64/versions/14.04/providers/virtualbox.box'
+  ## Cannot build necessary gems without 3GB+ of ram.
   config.vm.provider 'virtualbox' do |v|
     v.memory = 4096
     v.cpus = 2
@@ -27,9 +28,7 @@ Vagrant.configure('2') do |config|
     box1.vm.provision 'chef_solo' do |chef|
       chef.cookbooks_path = './cookbooks'
       chef.roles_path = './roles'
-      chef.json = {
-
-      }
+      chef.json = {}
       chef.add_role 'test_role'
     end
   end

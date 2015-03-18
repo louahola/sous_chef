@@ -28,10 +28,12 @@ end
 jenkins_plugin 'hipchat' do
   # not_if { File.exist?("/var/lib/jenkins/plugins/hipchat.jpi") }
   notifies :restart, 'service[jenkins]', :immediately
+  only_if { node['sous_chef']['hipchat_enabled'] }
 end
 
-jenkins_plugin 'AnsiColor' do
-  not_if { File.exist?('/var/lib/jenkins/plugins/ansicolor.jpi') }
+# AnsiColor
+jenkins_plugin 'ansicolor' do
+  # not_if { File.exist?('/var/lib/jenkins/plugins/ansicolor.jpi') }
   notifies :restart, 'service[jenkins]', :immediately
 end
 
@@ -88,4 +90,5 @@ jenkins_script 'configure hipchat notifier' do
     hipchat.room = "#{node['sous_chef']['hipchat_default_room']}"
     hipchat.save()
     EOH
+    only_if { node['sous_chef']['hipchat_enabled'] }
 end

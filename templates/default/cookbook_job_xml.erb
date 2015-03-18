@@ -20,10 +20,12 @@
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
+    <% @private_keys.each do |credential| %>
       <hudson.plugins.git.UserRemoteConfig>
         <url><%= @cookbook_url %></url>
-        <credentialsId>0530b42c-dce1-4819-b497-b55996b1a36c</credentialsId>
+        <credentialsId><%= credential['id'] %></credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
+    <% end %>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>

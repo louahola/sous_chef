@@ -63,13 +63,11 @@ default['sous_chef']['default_cookbook'] =
         },
         test_kitchen: {
           enabled: true,
-          command: 'bundle exec kitchen test
-          rm -f Berksfile.lock'
+          command: 'bundle exec kitchen test'
         },
         upload_cookbook: {
           enabled: true,
-          command: 'thor version:bump patch
-          rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'
+          command: 'rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'
           knife cookbook upload replace_with_cookbook --cookbook-path . --freeze
           rm -rf replace_with_cookbook'
         }
@@ -87,6 +85,7 @@ default['sous_chef']['smtp_admin_address'] = 'email@address.com'
 default['sous_chef']['smtp_email_suffix'] = '@address.com'
 
 ## Hipchat Notifier
+default['sous_chef']['hipchat_enabled'] = false
 default['sous_chef']['hipchat_auth_token'] = ''
 default['sous_chef']['hipchat_send_as'] = 'Sous Chef'
 default['sous_chef']['hipchat_server_url'] = 'yourhipchat.server.com'
@@ -97,13 +96,16 @@ default['sous_chef']['hipchat_default_room'] = 'Chef'
 default['jenkins']['master']['install_method'] = 'package'
 default['jenkins']['master']['version'] = nil
 
-## Gitlab Deploy Key Credentials
-default['sous_chef']['gitlab_credential_id'] = ''
-default['sous_chef']['gitlab_public_key'] = ''
+## Private Key Credentials
+default['sous_chef']['jenkins_private_key_credentials'] = []
 
 ## Gitlab Service Account Credentials
 default['sous_chef']['gitlab_service_account_key'] = ''
 
 ## Chef
+default['sous_chef']['chef']['manage_chef_config'] = false
 default['sous_chef']['chef']['username'] = 'jenkins_cookbook'
 default['sous_chef']['chef']['server_url'] = 'https://chef.server.url.com'
+default['sous_chef']['chef']['validation_client_name'] = 'chef-validator'
+default['sous_chef']['chef']['chef-validator'] = ''
+default['sous_chef']['chef']['user_pem'] = ''

@@ -26,7 +26,8 @@ node['sous_chef']['merged_cookbooks'].each do |cookbook|
       cookbook_url: cookbook['cookbook_url'],
       notification: cookbook['notification'],
       triggers: cookbook['triggers'],
-      steps: cookbook['steps']
+      steps: cookbook['steps'],
+      private_keys: node['sous_chef']['jenkins_private_key_credentials']
     )
   end
 

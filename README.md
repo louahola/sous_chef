@@ -17,12 +17,12 @@ This cookbook depends on several other cookbooks to accomplish the task of confi
 * 'jenkins'
 * 'git'
 * 'build-essential'
-* 'rvm'
 * 'apt'
 
 Platforms
 ---------
-* Ubuntu
+* Ubuntu 12.04 LTS
+* Ubuntu 14.04 LTS
 
 Testing
 -------
@@ -54,12 +54,48 @@ This cookbook by default will setup a job per cookbook.  These jobs will be brok
 This cookbook stresses convention > configuration.  This means that there is a default job structure and defaults for
 many of the configuration options.  These defaults are designed to be sane and reasonable with the ability to override  as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default  setup for each cookbook job can be found in the default['sous_chef']['default_cookbook'] attribute or also below  in the attribute section of this readme.
 
+Pre-Requisites
+--------------
+### SSH Keys for Git Access
+When jenkins clones a cookbook it may require ssh access to successfully pull down the remote repository.  Sous_Chef will provide a relatively basic way to get your ssh keys setup for a cookbook job.  You can configure an array of hashes in node['sous_chef']['jenkins_private_key_credentials'] to manage the private keys on sous_chef.  Each hash should look like the example below.
+
+#### Attributes:
+```
+{
+  name: '', - The name of your jenkins credential
+  id: '', - The ID for the credential
+  description: '', - A human readable friendly description describing the credential
+  private_key: '', - The private key associated with this credential.
+}
+```
+
+The ID field must match regular expression /[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/.  An example key taken from the jenkins cookbook readme looks as follows: 'fa3aab48-4edc-446d-b1e2-1d89d86f4458'
+
+Long term plans are to rely on data_bags for the private_key or even the entire credential object but for now setting the private key as an attribute will suffice.
+
+### Chef Server Access:
+
+Sous_Chef can upload your cookbook to your chef server after completion of your pipeline.  To do this you need an account on your chef server with access to upload cookbooks.  Sous_Chef provides a very basic and way to configure your jenkins node to communicate with your chef server.  Simply set a few attributes as they pertain to your chef server and sous chef can configure the jenkins user with this information.
+
+#### Attributes:
+```
+node['sous_chef']['chef']['manage_chef_config'] - Have Sous_Chef cookbook manage your chef configuration
+node['sous_chef']['chef']['username'] - Username on the chef server
+node['sous_chef']['chef']['server_url'] - Chef server URL
+node['sous_chef']['chef']['validation_client_name'] -
+node['sous_chef']['chef']['chef-validator'] - Your chef-validator pem
+node['sous_chef']['chef']['user_pem'] - Your private key for the chef user your created
+```
+
+Long term there are plans to rely on data_bags for the chef-validator and user_pem but for now simply putting the keys as attributes will suffice.
+
 Recipes
 -------
 
 * \_base - This recipe includes pre-req and shared requirements for jenkins servers both master and slave.
 * \_cookbook_job - The recipe to setup a job for cookbook testing
 * \_plugins - The recipe which contains plugin installations and configuration
+* \_chef_config - The recipe which will configure a .chef directory inside of the jenkins home directory for chef server access
 * default - The recipe that does nothing. Don't use it.
 * server - The recipe which sets up a jenkins master instance.
 

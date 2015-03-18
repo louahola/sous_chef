@@ -28,8 +28,7 @@ sous_chef: {
           command: 'echo bundle exec kitchen test'
         },
         upload_cookbook: {
-          command: 'echo thor version:bump patch
-          echo rm -rf replace_with_cookbook
+          command: 'echo rm -rf replace_with_cookbook
           echo rsync -avz . ./replace_with_cookbook --exclude replace_with_cookbook
           echo knife cookbook upload replace_with_cookbook --cookbook-path . --freeze'
         }

@@ -1,0 +1,8 @@
+log_level                :info
+log_location             STDOUT
+node_name                '<%= node['sous_chef']['chef']['username'] %>'
+client_key               '<%= node['jenkins']['master']['home'] %>/.chef/jenkins_cookbook.pem'
+validation_client_name   'chef-validator'
+validation_key           '<%= node['jenkins']['master']['home'] %>/.chef/chef-validator.pem'
+chef_server_url          '<%= node['sous_chef']['chef']['server_url'] %>'
+syntax_check_cache_path  '<%= node['jenkins']['master']['home'] %>/.chef/syntax_check_cache'
