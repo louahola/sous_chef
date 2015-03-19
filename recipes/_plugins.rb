@@ -28,7 +28,7 @@ end
 jenkins_plugin 'hipchat' do
   # not_if { File.exist?("/var/lib/jenkins/plugins/hipchat.jpi") }
   notifies :restart, 'service[jenkins]', :immediately
-  only_if { node['sous_chef']['hipchat_enabled'] }
+  only_if { node['sous_chef']['plugins']['hipchat']['enabled'] }
 end
 
 # AnsiColor
