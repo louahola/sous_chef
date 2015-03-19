@@ -78,7 +78,6 @@ jenkins_script 'configure admin address' do
     EOH
 end
 
-
 jenkins_script 'configure hipchat notifier' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()
@@ -90,5 +89,5 @@ jenkins_script 'configure hipchat notifier' do
     hipchat.room = "#{node['sous_chef']['plugins']['hipchat']['default_room']}"
     hipchat.save()
     EOH
-    only_if { node['sous_chef']['plugins']['hipchat']['enabled'] }
+  only_if { node['sous_chef']['plugins']['hipchat']['enabled'] }
 end
