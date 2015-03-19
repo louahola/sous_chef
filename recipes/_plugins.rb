@@ -85,7 +85,6 @@ jenkins_script 'configure hipchat notifier' do
     hipchat.server = "#{node['sous_chef']['plugins']['hipchat']['server_url']}"
     hipchat.sendAs = "#{node['sous_chef']['plugins']['hipchat']['send_as']}"
     hipchat.token = "#{node['sous_chef']['plugins']['hipchat']['auth_token']}"
-    hipchat.buildServerUrl = "#{node['sous_chef']['plugins']['hipchat']['build_server_url']}"
     hipchat.room = "#{node['sous_chef']['plugins']['hipchat']['default_room']}"
     hipchat.save()
     EOH
