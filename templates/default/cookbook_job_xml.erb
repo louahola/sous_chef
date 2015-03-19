@@ -3,21 +3,8 @@
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-  <% if @notification['hipchat']['enabled'] %>
-      <jenkins.plugins.hipchat.HipChatNotifier_-HipChatJobProperty plugin="hipchat@0.1.8">
-          <room><%= @notification['hipchat']['hipchat_room'] %></room>
-          <startNotification><%= @notification['hipchat']['notifyStarted'] %></startNotification>
-          <notifySuccess><%= @notification['hipchat']['notifySuccess'] %></notifySuccess>
-          <notifyAborted><%= @notification['hipchat']['notifyAborted'] %></notifyAborted>
-          <notifyNotBuilt><%= @notification['hipchat']['notifyNotBuilt'] %></notifyNotBuilt>
-          <notifyUnstable><%= @notification['hipchat']['notifyUnstable'] %></notifyUnstable>
-          <notifyFailure><%= @notification['hipchat']['notifyFailure'] %></notifyFailure>
-          <notifyBackToNormal><%= @notification['hipchat']['notifyBackToNormal'] %></notifyBackToNormal>
-      </jenkins.plugins.hipchat.HipChatNotifier_-HipChatJobProperty>
-  <% end %>
-  </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3">
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
     <% @private_keys.each do |credential| %>
@@ -67,13 +54,19 @@
     </hudson.tasks.Mailer>
     <% end %>
     <% if @notification['hipchat']['enabled'] %>
-    <jenkins.plugins.hipchat.HipChatNotifier plugin="hipchat@0.1.8">
-        <server><%= node['sous_chef']['plugins']['hipchat']['server_url'] %></server>
-        <authToken><%= node['sous_chef']['plugins']['hipchat']['auth_token'] %></authToken>
-        <buildServerUrl><%= node['sous_chef']['plugins']['hipchat']['build_server_url'] %></buildServerUrl>
-        <room><%= @notification['hipchat']['hipchat_room'] %></room>
-        <sendAs><%= node['sous_chef']['plugins']['hipchat']['send_as'] %></sendAs>
-      </jenkins.plugins.hipchat.HipChatNotifier>
+    <jenkins.plugins.hipchat.HipChatNotifier plugin="hipchat@0.1.9">
+      <token><%= node['sous_chef']['plugins']['hipchat']['auth_token'] %></token>
+      <room><%= @notification['hipchat']['hipchat_room'] %></room>
+      <startNotification><%= @notification['hipchat']['notifyStarted'] %></startNotification>
+      <notifySuccess><%= @notification['hipchat']['notifySuccess'] %></notifySuccess>
+      <notifyAborted><%= @notification['hipchat']['notifyAborted'] %></notifyAborted>
+      <notifyNotBuilt><%= @notification['hipchat']['notifyNotBuilt'] %></notifyNotBuilt>
+      <notifyUnstable><%= @notification['hipchat']['notifyUnstable'] %></notifyUnstable>
+      <notifyFailure><%= @notification['hipchat']['notifyFailure'] %></notifyFailure>
+      <notifyBackToNormal><%= @notification['hipchat']['notifyBackToNormal'] %></notifyBackToNormal>
+      <startJobMessage><%= @notification['hipchat']['startJobMessage'] %></startJobMessage>
+      <completeJobMessage><%= @notification['hipchat']['completeJobMessage'] %></completeJobMessage>
+    </jenkins.plugins.hipchat.HipChatNotifier>
     <% end %>
   </publishers>
   <buildWrappers>
