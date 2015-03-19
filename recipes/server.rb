@@ -20,6 +20,7 @@
 include_recipe 'jenkins::master'
 include_recipe 'sous_chef::_base'
 include_recipe 'sous_chef::_plugins'
+include_recipe 'sous_chef::_chef_config' if node['sous_chef']['chef']['manage_chef_config']
 
 ## Setup Private Keys
 node['sous_chef']['jenkins_private_key_credentials'].each do |credential|
