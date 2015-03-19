@@ -61,10 +61,10 @@ jenkins_script 'configure mailer' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()
     mailer = jenkins.getDescriptorByType(hudson.tasks.Mailer.DescriptorImpl)
-    mailer.setSmtpHost("#{node['sous_chef']['smtp_host']}")
-    mailer.setSmtpPort("#{node['sous_chef']['smtp_port']}")
-    mailer.setDefaultSuffix("#{node['sous_chef']['smtp_email_suffix']}")
-    mailer.setReplyToAddress("#{node['sous_chef']['smtp_reply_to_address']}")
+    mailer.setSmtpHost("#{node['sous_chef']['plugins']['mailer']['smtp_host']}")
+    mailer.setSmtpPort("#{node['sous_chef']['plugins']['mailer']['smtp_port']}")
+    mailer.setDefaultSuffix("#{node['sous_chef']['plugins']['mailer']['smtp_email_suffix']}")
+    mailer.setReplyToAddress("#{node['sous_chef']['plugins']['mailer']['smtp_reply_to_address']}")
     mailer.save()
     EOH
 end
@@ -73,22 +73,22 @@ jenkins_script 'configure admin address' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()
     location_conf = jenkins.getDescriptor(jenkins.model.JenkinsLocationConfiguration)
-    location_conf.setAdminAddress("#{node['sous_chef']['smtp_admin_address']}")
+    location_conf.setAdminAddress("#{node['sous_chef']['plugins']['mailer']['smtp_admin_address']}")
     location_conf.save()
     EOH
 end
 
-# TODO: Make hipchat plugin optional?
+
 jenkins_script 'configure hipchat notifier' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()
     hipchat = jenkins.getDescriptorByType(jenkins.plugins.hipchat.HipChatNotifier.DescriptorImpl)
-    hipchat.server = "#{node['sous_chef']['hipchat_server_url']}"
-    hipchat.sendAs = "#{node['sous_chef']['hipchat_send_as']}"
-    hipchat.token = "#{node['sous_chef']['hipchat_auth_token']}"
-    hipchat.buildServerUrl = "#{node['sous_chef']['hipchat_build_server_url']}"
-    hipchat.room = "#{node['sous_chef']['hipchat_default_room']}"
+    hipchat.server = "#{node['sous_chef']['plugins']['hipchat']['server_url']}"
+    hipchat.sendAs = "#{node['sous_chef']['plugins']['hipchat']['send_as']}"
+    hipchat.token = "#{node['sous_chef']['plugins']['hipchat']['auth_token']}"
+    hipchat.buildServerUrl = "#{node['sous_chef']['plugins']['hipchat']['build_server_url']}"
+    hipchat.room = "#{node['sous_chef']['plugins']['hipchat']['default_room']}"
     hipchat.save()
     EOH
-    only_if { node['sous_chef']['hipchat_enabled'] }
+    only_if { node['sous_chef']['plugins']['hipchat']['enabled'] }
 end

@@ -68,11 +68,11 @@
     <% end %>
     <% if @notification['hipchat']['enabled'] %>
     <jenkins.plugins.hipchat.HipChatNotifier plugin="hipchat@0.1.8">
-        <server><%= node['sous_chef']['hipchat_server_url'] %></server>
-        <authToken><%= node['sous_chef']['hipchat_auth_token'] %></authToken>
-        <buildServerUrl><%= node['sous_chef']['hipchat_build_server_url'] %></buildServerUrl>
-        <room><%= node['sous_chef']['hipchat_server_url'] %></room>
-        <sendAs><%= node['sous_chef']['hipchat_send_as'] %></sendAs>
+        <server><%= node['sous_chef']['plugins']['hipchat']['server_url'] %></server>
+        <authToken><%= node['sous_chef']['plugins']['hipchat']['auth_token'] %></authToken>
+        <buildServerUrl><%= node['sous_chef']['plugins']['hipchat']['build_server_url'] %></buildServerUrl>
+        <room><%= @notification['hipchat']['hipchat_room'] %></room>
+        <sendAs><%= node['sous_chef']['plugins']['hipchat']['send_as'] %></sendAs>
       </jenkins.plugins.hipchat.HipChatNotifier>
     <% end %>
   </publishers>
