@@ -207,59 +207,117 @@ Attributes
 
 Below is the definition of the default cookbook attribute.  This is the base for the job and steps being setup.  This allows convention > configuration with minimal configuration.
 
+### Default Cookbook
+
 ```ruby
 default['sous_chef']['default_cookbook'] =
-{
-    cookbook_name: 'cookbook_name',
-    cookbook_url: 'cookbook_url',
-    notification: {
-      email: {
-        enabled: true,
-        maintainers_email: 'noreply@commercehub.com'
+    {
+      cookbook_name: 'cookbook_name',
+      cookbook_url: 'cookbook_url',
+      notification: {
+        email: {
+          enabled: true,
+          maintainers_email: 'email@address.com'
+        },
+        hipchat: {
+          enabled: false,
+          hipchat_room: 'Chef',
+          notifyStarted: false,
+          notifySuccess: true,
+          notifyAborted: true,
+          notifyNotBuilt: false,
+          notifyUnstable: true,
+          notifyFailure: true,
+          notifyBackToNormal: true,
+          startJobMessage: '',
+          completeJobMessage: ''
+        }
       },
-      hipchat: {
-        enabled: false,
-        hipchat_room: 'Chef',
-        notifyStarted: false,
-        notifySuccess: true,
-        notifyAborted: true,
-        notifyNotBuilt: false,
-        notifyUnstable: true,
-        notifyFailure: true,
-        notifyBackToNormal: true
-      }
-    },
-    triggers: {
-      poll_scm: {
-        enabled: true,
-        schedule: '*/1 * * * *'
-      }
-    },
-    steps: {
-      bundle: {
-        enabled: true,
-        command: 'bundle install --path vendor/bundle'
+      triggers: {
+        poll_scm: {
+          enabled: true,
+          schedule: '*/1 * * * *'
+        }
       },
-      foodcritic: {
-        enabled: true,
-        command: 'bundle exec foodcritic . -f any'
-      },
-      rubocop: {
-        enabled: true,
-        command: 'bundle exec rubocop'
-      },
-      test_kitchen: {
-        enabled: true,
-        command: 'bundle exec kitchen test',
-      },
-      upload_cookbook: {
-        enabled: true,
-        command: 'thor version:bump patch
-        rm -rf replace_with_cookbook
-        rsync -avz . ./replace_with_cookbook --exclude replace_with_cookbook
-        knife cookbook upload replace_with_cookbook --cookbook-path . --freeze',
+      steps: {
+        bundle: {
+          enabled: true,
+          command: 'bundle install --path vendor/bundle'
+        },
+        rubocop: {
+          enabled: true,
+          command: 'bundle exec rubocop'
+        },
+        foodcritic: {
+          enabled: true,
+          command: 'bundle exec foodcritic . -f any'
+        },
+        test_kitchen: {
+          enabled: true,
+          command: 'bundle exec kitchen test'
+        },
+        upload_cookbook: {
+          enabled: true,
+          command: 'rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'
+          knife cookbook upload replace_with_cookbook --cookbook-path . --freeze
+          rm -rf replace_with_cookbook'
+        }
       }
     }
+```
+
+### Jenkins Configuration
+
+```ruby
+default['sous_chef']['master_executors'] = 4
+default['jenkins']['master']['install_method'] = 'package'
+default['jenkins']['master']['version'] = nil
+```
+
+### Plugins
+
+```ruby
+## Mailer Notifier
+default['sous_chef']['plugins']['mailer']['smtp_host'] = 'yourmail.server.com'
+default['sous_chef']['plugins']['mailer']['smtp_port'] = '25'
+default['sous_chef']['plugins']['mailer']['smtp_reply_to_address'] = 'email@address.com'
+default['sous_chef']['plugins']['mailer']['smtp_admin_address'] = 'email@address.com'
+default['sous_chef']['plugins']['mailer']['smtp_email_suffix'] = '@address.com'
+
+## Hipchat Notifier
+default['sous_chef']['plugins']['hipchat']['enabled'] = false
+default['sous_chef']['plugins']['hipchat']['auth_token'] = ''
+default['sous_chef']['plugins']['hipchat']['send_as'] = 'Sous Chef'
+default['sous_chef']['plugins']['hipchat']['server_url'] = 'yourhipchat.server.com'
+default['sous_chef']['plugins']['hipchat']['build_server_url'] = "http://#{node['fqdn']}:8080/"
+default['sous_chef']['plugins']['hipchat']['default_room'] = 'Chef'
+```
+
+### Chef
+
+```ruby
+default['sous_chef']['chef']['manage_chef_config'] = false
+default['sous_chef']['chef']['username'] = 'jenkins_cookbook'
+default['sous_chef']['chef']['server_url'] = 'https://chef.server.url.com'
+default['sous_chef']['chef']['validation_client_name'] = 'chef-validator'
+default['sous_chef']['chef']['chef-validator'] = ''
+default['sous_chef']['chef']['user_pem'] = ''
+```
+
+### Private Keys
+
+```ruby
+default['sous_chef']['jenkins_private_key_credentials'] = []
+```
+
+The Hash(s) under the jenkins_private_key_credentials should look like this
+
+```
+{
+  name: '', - The name of your jenkins credential
+  id: '', - The ID for the credential
+  description: '', - A human readable friendly description describing the credential
+  private_key: '', - The private key associated with this credential.
 }
 ```
 
