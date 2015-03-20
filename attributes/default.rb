@@ -40,8 +40,8 @@ default['sous_chef']['default_cookbook'] =
           notifyUnstable: true,
           notifyFailure: true,
           notifyBackToNormal: true,
-          startJobMessage: '$JOB_NAME #$BUILD_NUMBER $STATUS ($CHANGES_OR_CAUSE) (<a href="$URL">Open</a>)',
-          completeJobMessage: '$JOB_NAME #$BUILD_NUMBER $STATUS after $DURATION (<a href="$URL">Open</a>)'
+          startJobMessage: '',
+          completeJobMessage: ''
         }
       },
       triggers: {
