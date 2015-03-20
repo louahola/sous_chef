@@ -20,7 +20,6 @@
 node['sous_chef']['merged_cookbooks'].each do |cookbook|
   xml = File.join(Chef::Config['file_cache_path'], "#{cookbook['cookbook_name']}.xml")
 
-  log "Cookbook Notification for #{cookbook['cookbook_name']}: #{cookbook['notification']}"
   template xml do
     source 'cookbook_job_xml.erb'
     variables(

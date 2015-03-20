@@ -48,9 +48,9 @@
   <publishers>
     <% if @notification['email']['enabled'] %>
     <hudson.tasks.Mailer plugin="mailer@1.11">
-        <recipients><%= @notification['email']['maintainers_email'] %></recipients>
-        <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-        <sendToIndividuals>false</sendToIndividuals>
+      <recipients><%= @notification['email']['maintainers_email'] %></recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
     <% end %>
     <% if @notification['hipchat']['enabled'] %>
@@ -70,8 +70,8 @@
     <% end %>
   </publishers>
   <buildWrappers>
-      <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
-          <colorMapName>xterm</colorMapName>
-      </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
   </buildWrappers>
 </project>
