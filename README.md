@@ -278,17 +278,17 @@ default['jenkins']['master']['version'] = nil
 
 ```ruby
 ## Mailer Notifier
-default['sous_chef']['plugins']['mailer']['smtp_host'] = 'yourmail.server.com'
+default['sous_chef']['plugins']['mailer']['smtp_host'] = 'yourmailserver.example.com'
 default['sous_chef']['plugins']['mailer']['smtp_port'] = '25'
-default['sous_chef']['plugins']['mailer']['smtp_reply_to_address'] = 'email@address.com'
-default['sous_chef']['plugins']['mailer']['smtp_admin_address'] = 'email@address.com'
-default['sous_chef']['plugins']['mailer']['smtp_email_suffix'] = '@address.com'
+default['sous_chef']['plugins']['mailer']['smtp_reply_to_address'] = 'email@example.com'
+default['sous_chef']['plugins']['mailer']['smtp_admin_address'] = 'email@example.com'
+default['sous_chef']['plugins']['mailer']['smtp_email_suffix'] = '@example.com'
 
 ## Hipchat Notifier
 default['sous_chef']['plugins']['hipchat']['enabled'] = false
 default['sous_chef']['plugins']['hipchat']['auth_token'] = ''
 default['sous_chef']['plugins']['hipchat']['send_as'] = 'Sous Chef'
-default['sous_chef']['plugins']['hipchat']['server_url'] = 'yourhipchat.server.com'
+default['sous_chef']['plugins']['hipchat']['server_url'] = 'yourhipchatserver.example.com'
 default['sous_chef']['plugins']['hipchat']['build_server_url'] = "http://#{node['fqdn']}:8080/"
 default['sous_chef']['plugins']['hipchat']['default_room'] = 'Chef'
 ```
@@ -298,7 +298,7 @@ default['sous_chef']['plugins']['hipchat']['default_room'] = 'Chef'
 ```ruby
 default['sous_chef']['chef']['manage_chef_config'] = false
 default['sous_chef']['chef']['username'] = 'jenkins_cookbook'
-default['sous_chef']['chef']['server_url'] = 'https://chef.server.url.com'
+default['sous_chef']['chef']['server_url'] = 'https://yourchefserver.example.com'
 default['sous_chef']['chef']['validation_client_name'] = 'chef-validator'
 default['sous_chef']['chef']['chef-validator'] = ''
 default['sous_chef']['chef']['user_pem'] = ''

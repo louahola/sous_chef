@@ -24,7 +24,7 @@ suites:
                 notification: {
                   email: {
                     enabled: false,
-                    maintainers_email: 'email@address.com'
+                    maintainers_email: 'email@example.com'
                   },
                   hipchat: {
                     enabled: false,
