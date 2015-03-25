@@ -106,42 +106,42 @@ attribute 'sous_chef/chef/manage_chef_config',
 
 attribute 'sous_chef/chef/username',
   :display_name => 'Chef Username',
-  :description => 'If Sous Chef is managing your chef config, this is the username that would get used in the knife.rb and the user that will need to exist on your chef server',
+  :description => 'The username that would get used in the knife.rb and the user that will need to exist on your chef server',
   :type => 'string',
   :required => 'optional',
   :default => ''
 
 attribute 'sous_chef/chef/server_url',
   :display_name => 'Chef Server url',
-  :description => 'If Sous Chef is managing your chef config, the chef server url that will get put into knife.rb and cookbooks will be uploaded to.',
+  :description => 'The chef server url that will get put into knife.rb and cookbooks will be uploaded to.',
   :type => 'string',
   :required => 'optional',
   :default => ''
 
 attribute 'sous_chef/chef/validation_client_name',
   :display_name => 'Chef Validation Client Name',
-  :description => 'If Sous Chef is managing your chef config, the chef validator file name.',
+  :description => 'The chef validator file name where the chef-validator pem will be placed.',
   :type => 'string',
   :required => 'optional',
   :default => 'chef-validator'
 
 attribute 'sous_chef/chef/chef-validator',
   :display_name => 'Chef Validator PEM',
-  :description => 'If Sous Chef is managing your chef config, this is the chef-validator pem for your chef server.',
+  :description => 'The chef-validator pem for your chef server.',
   :type => 'string',
   :required => 'optional',
   :default => ''
 
 attribute 'sous_chef/chef/user_pem',
   :display_name => 'Chef User PEM',
-  :description => 'If Sous Chef is managing your chef config, this is the private key for the user setup to upload cookbooks.',
+  :description => 'The private key for the username defined in sous_chef/chef/username.  The user setup to upload cookbooks to chef',
   :type => 'string',
   :required => 'optional',
   :default => ''
 
 attribute 'sous_chef/cookbooks',
   :display_name => 'Cookbooks',
-  :description => 'An array of cookbook hashes where you define cookbooks that will run on Sous Chef and override any properties from the default_cookbook hash as needed..',
+  :description => 'An array of cookbook hashes, each hash defines a cookbook tested on Sous Chef, override properties from default_cookbook hash as needed.',
   :type => 'array',
   :required => 'required',
   :default => []

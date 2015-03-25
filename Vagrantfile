@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'trusty64'
-  config.vm.box_url = 'https://vagrantcloud.com/ubuntu/boxes/trusty64/versions/14.04/providers/virtualbox.box'
+  config.vm.box = 'ubuntu/trusty64'
+
   ## Cannot build necessary gems without 3GB+ of ram.
   config.vm.provider 'virtualbox' do |v|
     v.memory = 4096
