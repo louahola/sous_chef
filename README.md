@@ -217,11 +217,11 @@ default['sous_chef']['default_cookbook'] =
       notification: {
         email: {
           enabled: true,
-          maintainers_email: 'email@address.com'
+          maintainers_email: 'email@example.com'
         },
         hipchat: {
           enabled: false,
-          hipchat_room: 'Chef',
+          hipchat_room: '',
           notifyStarted: false,
           notifySuccess: true,
           notifyAborted: true,

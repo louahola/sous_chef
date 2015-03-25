@@ -28,11 +28,11 @@ default['sous_chef']['default_cookbook'] =
       notification: {
         email: {
           enabled: true,
-          maintainers_email: 'email@address.com'
+          maintainers_email: 'email@example.com'
         },
         hipchat: {
           enabled: false,
-          hipchat_room: 'Chef',
+          hipchat_room: '',
           notifyStarted: false,
           notifySuccess: true,
           notifyAborted: true,
@@ -80,19 +80,19 @@ default['sous_chef']['default_cookbook'] =
 default['sous_chef']['master_executors'] = 4
 
 ## Mailer Notifier
-default['sous_chef']['plugins']['mailer']['smtp_host'] = 'yourmail.server.com'
-default['sous_chef']['plugins']['mailer']['smtp_port'] = '25'
-default['sous_chef']['plugins']['mailer']['smtp_reply_to_address'] = 'email@address.com'
-default['sous_chef']['plugins']['mailer']['smtp_admin_address'] = 'email@address.com'
-default['sous_chef']['plugins']['mailer']['smtp_email_suffix'] = '@address.com'
+default['sous_chef']['plugins']['mailer']['smtp_host'] = ''
+default['sous_chef']['plugins']['mailer']['smtp_port'] = ''
+default['sous_chef']['plugins']['mailer']['smtp_reply_to_address'] = ''
+default['sous_chef']['plugins']['mailer']['smtp_admin_address'] = ''
+default['sous_chef']['plugins']['mailer']['smtp_email_suffix'] = ''
 
 ## Hipchat Notifier
 default['sous_chef']['plugins']['hipchat']['enabled'] = false
 default['sous_chef']['plugins']['hipchat']['auth_token'] = ''
 default['sous_chef']['plugins']['hipchat']['send_as'] = 'Sous Chef'
-default['sous_chef']['plugins']['hipchat']['server_url'] = 'yourhipchat.server.com'
+default['sous_chef']['plugins']['hipchat']['server_url'] = ''
 default['sous_chef']['plugins']['hipchat']['build_server_url'] = "http://#{node['fqdn']}:8080/"
-default['sous_chef']['plugins']['hipchat']['default_room'] = 'Chef'
+default['sous_chef']['plugins']['hipchat']['default_room'] = ''
 
 ## Jenkins Cookbook
 default['jenkins']['master']['install_method'] = 'package'
@@ -103,8 +103,8 @@ default['sous_chef']['jenkins_private_key_credentials'] = []
 
 ## Chef
 default['sous_chef']['chef']['manage_chef_config'] = false
-default['sous_chef']['chef']['username'] = 'jenkins_cookbook'
-default['sous_chef']['chef']['server_url'] = 'https://chef.server.url.com'
+default['sous_chef']['chef']['username'] = ''
+default['sous_chef']['chef']['server_url'] = ''
 default['sous_chef']['chef']['validation_client_name'] = 'chef-validator'
 default['sous_chef']['chef']['chef-validator'] = ''
 default['sous_chef']['chef']['user_pem'] = ''
