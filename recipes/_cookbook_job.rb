@@ -2,7 +2,7 @@
 # Cookbook Name:: sous_chef
 # Recipe::_cookbook_job
 #
-# Copyright 2015 Larry Zarou <larry.zarou@gmail.com>
+# Copyright 2015 CommerceHub
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

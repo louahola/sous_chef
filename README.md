@@ -40,7 +40,7 @@ Tested on:
 Usage
 =====
 
-The chub\_sous\_chef cookbook will setup a jenkins server with the focus on cookbook testing. Many of the recipes are
+The sous\_chef cookbook will setup a jenkins server with the focus on cookbook testing. Many of the recipes are
 designed to only be included in other recipes, these are noted by starting with underscore('_').
 
 This cookbook by default will setup a job per cookbook.  These jobs will be broken into several steps as part of a cookbook testing pipeline. These steps include:
@@ -52,12 +52,12 @@ This cookbook by default will setup a job per cookbook.  These jobs will be brok
 * upload_cookbook
 
 This cookbook stresses convention > configuration.  This means that there is a default job structure and defaults for
-many of the configuration options.  These defaults are designed to be sane and reasonable with the ability to override  as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default  setup for each cookbook job can be found in the default['sous_chef']['default_cookbook'] attribute or also below  in the attribute section of this readme.
+many of the configuration options.  These defaults are designed to be sane and reasonable with the ability to override  as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default  setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute or also below  in the attribute section of this readme.
 
 Pre-Requisites
 --------------
 ### SSH Keys for Git Access
-When jenkins clones a cookbook it may require ssh access to successfully pull down the remote repository.  Sous_Chef will provide a relatively basic way to get your ssh keys setup for a cookbook job.  You can configure an array of hashes in node['sous_chef']['jenkins_private_key_credentials'] to manage the private keys on sous_chef.  Each hash should look like the example below.
+When jenkins clones a cookbook it may require ssh access to successfully pull down the remote repository.  Sous_Chef will provide a relatively basic way to get your ssh keys setup for a cookbook job.  You can configure an array of hashes in `node['sous_chef']['jenkins_private_key_credentials']` to manage the private keys on sous_chef.  Each hash should look like the example below.
 
 #### Attributes:
 ```
@@ -103,7 +103,7 @@ Role File Examples
 ------------------
 In the below examples any and all combinations of attributes are supported.  Each cookbook will be merged with the
 default cookbook. Feel free to only provide one attribute in a hash if you are only changing that attribute.  You
-can refer to the ```default['sous_chef']['default_cookbook']``` attribute for all possible configurable options.
+can refer to the `default['sous_chef']['default_cookbook']` attribute for all possible configurable options.
 
 #### Setup the jenkins cookbook testing server with all defaults
 
@@ -123,10 +123,10 @@ sous_chef: {
   cookbooks: [
     {
       cookbook_name: 'sous_chef',
-      cookbook_url: 'git@git.nexus.commercehub.com:chef/sous_chef.git',
+      cookbook_url: '<replace with github clone url>',
       notification: {
         email: {
-          maintainers_email: 'myemail@commercehub.com'
+          maintainers_email: 'email@example.com'
         },
       }
     }
@@ -142,10 +142,10 @@ sous_chef: {
   cookbooks: [
     {
       cookbook_name: 'sous_chef',
-      cookbook_url: 'git@git.nexus.commercehub.com:chef/sous_chef.git',
+      cookbook_url: '<replace with github clone url>',
       notification: {
         email: {
-          maintainers_email: 'lzarou@commercehub.com'
+          maintainers_email: 'email@example.com'
         },
         hipchat: {
           enabled: true,
@@ -165,7 +165,7 @@ default_attributes(
         cookbooks: [
         {
             cookbook_name: 'sous_chef',
-            cookbook_url: 'git@git.nexus.commercehub.com:chef/sous_chef.git',
+            cookbook_url: '<replace with github clone url>',
             triggers: {
                 poll_scm: {
                     schedule: '*/5 * * * *'
@@ -185,10 +185,10 @@ sous_chef: {
   cookbooks: [
     {
       cookbook_name: 'sous_chef',
-      cookbook_url: 'git@git.nexus.commercehub.com:chef/sous_chef.git',
+      cookbook_url: '<replace with github clone url>',
       notification: {
         email: {
-          maintainers_email: 'lzarou@commercehub.com'
+          maintainers_email: 'email@example.com'
         },
       },
       steps: {
@@ -324,12 +324,11 @@ The Hash(s) under the jenkins_private_key_credentials should look like this
 License and Author
 ==================
 
-Author:: [Larry Zarou](<lzarou@commercehub.com>)  
+Author:: CommerceHub  
 Author\_Website:: [www.commercehub.com](www.commercehub.com)  
-Twitter:: [@zarrylarou ](http://twitter.com/zarrylarou)  
-IRC:: zarry on freenode  
+Twitter:: [@CommerceHubTech ](http://twitter.com/CommerceHubTech)  
 
-Copyright 2015, Larry Zarou
+Copyright 2015, CommerceHub
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
