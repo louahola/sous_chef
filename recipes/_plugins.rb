@@ -17,34 +17,32 @@
 # limitations under the License.
 #
 
-### Install Plugins ###
+######################
+## Install Plugins ##
+######################
 
 jenkins_plugin 'git' do
-  # not_if { File.exist?("/var/lib/jenkins/plugins/git.jpi") }
   notifies :restart, 'service[jenkins]', :immediately
 end
 
-# TODO: Make hipchat plugin optional?
 jenkins_plugin 'hipchat' do
-  # not_if { File.exist?("/var/lib/jenkins/plugins/hipchat.jpi") }
   notifies :restart, 'service[jenkins]', :immediately
   only_if { node['sous_chef']['plugins']['hipchat']['enabled'] }
 end
 
-# AnsiColor
 jenkins_plugin 'ansicolor' do
-  # not_if { File.exist?('/var/lib/jenkins/plugins/ansicolor.jpi') }
   notifies :restart, 'service[jenkins]', :immediately
 end
 
 ## The warnings plugin requires manual configuration ##
 ## Please see http://acrmp.github.io/foodcritic/#tracking_warnings_over_time
 jenkins_plugin 'warnings' do
-  # not_if { File.exist?("/var/lib/jenkins/plugins/warnings.jpi") }
   notifies :restart, 'service[jenkins]', :immediately
 end
 
-### Configure Plugins ###
+#######################
+## Configure Plugins ##
+########################
 
 ## Setup number of executors
 jenkins_script 'configure executors' do
@@ -69,6 +67,7 @@ jenkins_script 'configure mailer' do
     EOH
 end
 
+## Setup email admin address
 jenkins_script 'configure admin address' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()
@@ -78,6 +77,7 @@ jenkins_script 'configure admin address' do
     EOH
 end
 
+## Setup Hipchat
 jenkins_script 'configure hipchat notifier' do
   command <<-EOH.gsub(/^ {4}/, '')
     jenkins = jenkins.model.Jenkins.getInstance()

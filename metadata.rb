@@ -16,7 +16,7 @@ depends 'apt'
 attribute 'sous_chef/master_executors',
   :display_name => 'Master Executors',
   :description => 'The number of executors the jenkins master node should run with',
-  :type => 'integer',
+  :type => 'numeric',
   :required => 'required',
   :default => 4
 
@@ -88,7 +88,7 @@ attribute 'sous_chef/plugins/hipchat/build_server_url',
   :description => 'The jenkins build server url that the hipchat plugin will use in messages.',
   :type => 'string',
   :required => 'optional',
-  :default => "http://#{node['fqdn']}:8080/"
+  :default => 'http://#{node[\'fqdn\']}:8080/'
 
 attribute 'sous_chef/plugins/hipchat/default_room',
   :display_name => 'Hipchat Default Room',
