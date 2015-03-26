@@ -39,7 +39,7 @@ This cookbook is tested with rubocop, foodcritic and test-kitchen.
 Run `bundle install` to install required gems.
 
 * rubocop
-* foodcritic .
+* foodcritic
 * kitchen test
 
 Tested on:
