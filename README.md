@@ -9,6 +9,15 @@ This service sets up a server with cookbook testing in mind. This includes confi
 environment and installing any needed gems to get off the ground running bundle etc... Lastly the
 cookbook will configure and setup git and any ssh keys needed to communicate with the git server.
 
+Notes
+=====
+This cookbook is not yet ready for the general use-case, as it has been written to the specific
+facts of CommerceHub's environment.  The largest assumptions made here are vSphere as hypervisor,
+and Ubuntu Linux as the client OS.
+
+If you would like to extend/adapt for your usage, we encourage you to file issues and welcome
+Pull Requests.
+
 Requirements
 ============
 
