@@ -5,15 +5,14 @@ Description
 Installs and configures a Jenkins server for cookbook testing. Additionally will create jobs
 for cookbook testing based on an attribute driven system.
 
-This service sets up a server with cookbook testing in mind. This includes configuring the ruby
-environment and installing any needed gems to get off the ground running bundle etc... Lastly the
-cookbook will configure and setup git and any ssh keys needed to communicate with the git server.
+This service sets up a server which will execute your specified cookbook testing, including 
+ruby environment configuration, gem installation, bundler tasks, git and needed deploy keys.
 
 Notes
 =====
-This cookbook is not yet ready for the general use-case, as it has been written to the specific
-facts of CommerceHub's environment.  The largest assumptions made here are vSphere as hypervisor,
-and Ubuntu Linux as the client OS.
+This cookbook is not yet ready for the general use-case, as it has been written to the specifics
+ of CommerceHub's environment.  The largest assumptions made here are vSphere as hypervisor, and 
+ Ubuntu Linux as the client OS.
 
 If you would like to extend/adapt for your usage, we encourage you to file issues and welcome
 Pull Requests.
@@ -60,8 +59,8 @@ This cookbook by default will setup a job per cookbook.  These jobs will be brok
 * test_kitchen
 * upload_cookbook
 
-This cookbook stresses convention > configuration.  This means that there is a default job structure and defaults for
-many of the configuration options.  These defaults are designed to be sane and reasonable with the ability to override  as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default  setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute or also below  in the attribute section of this readme.
+This cookbook stresses convention over configuration.  There is a default job structure including defaults for
+many of the configuration options.  These defaults are designed to be sane and reasonable, but may be overridden as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute, and is also described in the Attributes section below.
 
 Pre-Requisites
 --------------
