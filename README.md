@@ -38,7 +38,7 @@ Usage
 The sous\_chef cookbook will setup a jenkins server with the end goal of having a continuous deployment pipeline for chef cookbooks. Many of the recipes are
 designed to only be included in other recipes, these are noted by starting with underscore('_').
 
-To setup just the jenkins server with no cookbook jobs refer to [Jenkins Server](#server) role file example.
+To setup just the jenkins server with no cookbook jobs refer to [Jenkins Server](#setup-the-jenkins-cookbook-testing-server-with-all-defaults) role file example.
 
 In addition to configuring the jenkins server with everything needed to start cookbook testing, Sous_Chef provides an attribute driven system to create jenkins jobs for cookbooks.  This job will represent the deployment pipeline for the chef cookbook.  These jobs will be broken into several steps as part of a cookbook testing pipeline. These steps include:
 
