@@ -2,17 +2,13 @@
 
 Description
 ===========
-Installs and configures a Jenkins server for cookbook testing. Additionally will create jobs
-for cookbook testing based on an attribute driven system.
+Installs and configures a Jenkins server for cookbook testing.  This cookbook sets up a continuous deployment pipeline for your chef cookbooks. Sous_Chef is an opinionated cookbook designed to simplify the process of testing and publishing your cookbooks to chef.
 
-This service sets up a server which will execute your specified cookbook testing, including 
-ruby environment configuration, gem installation, bundler tasks, git and needed deploy keys.
+This cookbook sets up a jenkins server which will execute your specified cookbook testing workflow in addition to machine configuration for ruby environment, gem installation, bundler tasks, git and needed deploy keys.
 
 Notes
 =====
-This cookbook is not yet ready for the general use-case, as it has been written to the specifics
- of CommerceHub's environment.  The largest assumptions made here are vSphere as hypervisor, and 
- Ubuntu Linux as the client OS.
+This cookbook is not yet ready for the general use-case, as it has been written to the specifics of CommerceHub's environment.  The largest assumptions made here are vSphere as hypervisor, and Ubuntu Linux as the client OS.  In addition to that we are currently running open source chef server 11.X.
 
 If you would like to extend/adapt for your usage, we encourage you to file issues and welcome
 Pull Requests.
@@ -32,26 +28,19 @@ Platforms
 * Ubuntu 12.04 LTS
 * Ubuntu 14.04 LTS
 
-Testing
--------
-This cookbook is tested with rubocop, foodcritic and test-kitchen.  
-Run `bundle install` to install required gems.
-
-* rubocop
-* foodcritic .
-* kitchen test
-
-Tested on:
-
-* Ubuntu 14.04
+Contributing
+============
+Refer to [Contributing](CONTRIBUTING.md) for more information about contributing to the sous_chef project.
 
 Usage
 =====
 
-The sous\_chef cookbook will setup a jenkins server with the focus on cookbook testing. Many of the recipes are
+The sous\_chef cookbook will setup a jenkins server with the end goal of having a continuous deployment pipeline for chef cookbooks. Many of the recipes are
 designed to only be included in other recipes, these are noted by starting with underscore('_').
 
-This cookbook by default will setup a job per cookbook.  These jobs will be broken into several steps as part of a cookbook testing pipeline. These steps include:
+To setup just the jenkins server with no cookbook jobs refer to [Jenkins Server](#server) role file example.
+
+In addition to configuring the jenkins server with everything needed to start cookbook testing, Sous_Chef provides an attribute driven system to create jenkins jobs for cookbooks.  This job will represent the deployment pipeline for the chef cookbook.  These jobs will be broken into several steps as part of a cookbook testing pipeline. These steps include:
 
 * bundle install
 * rubocop
@@ -60,7 +49,7 @@ This cookbook by default will setup a job per cookbook.  These jobs will be brok
 * upload_cookbook
 
 This cookbook stresses convention over configuration.  There is a default job structure including defaults for
-many of the configuration options.  These defaults are designed to be sane and reasonable, but may be overridden as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute, and is also described in the Attributes section below.
+many of the configuration options.  These defaults are designed to be sane and reasonable, but may be overridden as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute, and is also described in the Attributes section below.  Refer to the [Role File Examples](#role_examples) for an idea of how this functions.
 
 Pre-Requisites
 --------------
@@ -107,13 +96,13 @@ Recipes
 * default - The recipe that does nothing. Don't use it.
 * server - The recipe which sets up a jenkins master instance.
 
-Role File Examples
+<a name="role_examples"></a>Role File Examples
 ------------------
 In the below examples any and all combinations of attributes are supported.  Each cookbook will be merged with the
 default cookbook. Feel free to only provide one attribute in a hash if you are only changing that attribute.  You
 can refer to the `default['sous_chef']['default_cookbook']` attribute for all possible configurable options.
 
-#### Setup the jenkins cookbook testing server with all defaults
+<a name="server"></a>#### Setup the jenkins cookbook testing server with all defaults
 
 ```ruby
 run_list *%w[
