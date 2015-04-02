@@ -14,7 +14,7 @@ Contribute:
 3. Push to the branch (`git push -u fork my-new-feature`)
 4. Create a new Pull Request on GitHub
 
-<a name="testing"></a>Testing:
+Testing:
 -------
 This cookbook is tested with rubocop, foodcritic and test-kitchen.  
 Run `bundle install` to install required gems.  The following commands should all pass before submitting your pull request.

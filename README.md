@@ -49,7 +49,7 @@ In addition to configuring the jenkins server with everything needed to start co
 * upload_cookbook
 
 This cookbook stresses convention over configuration.  There is a default job structure including defaults for
-many of the configuration options.  These defaults are designed to be sane and reasonable, but may be overridden as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute, and is also described in the Attributes section below.  Refer to the [Role File Examples](#role_examples) for an idea of how this functions.
+many of the configuration options.  These defaults are designed to be sane and reasonable, but may be overridden as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute, and is also described in the Attributes section below.  Refer to the [Role File Examples](#role-file-examples) for an idea of how this functions.
 
 Pre-Requisites
 --------------
@@ -96,13 +96,13 @@ Recipes
 * default - The recipe that does nothing. Don't use it.
 * server - The recipe which sets up a jenkins master instance.
 
-<a name="role_examples"></a>Role File Examples
+Role File Examples
 ------------------
 In the below examples any and all combinations of attributes are supported.  Each cookbook will be merged with the
 default cookbook. Feel free to only provide one attribute in a hash if you are only changing that attribute.  You
 can refer to the `default['sous_chef']['default_cookbook']` attribute for all possible configurable options.
 
-<a name="server"></a>#### Setup the jenkins cookbook testing server with all defaults
+#### Setup the jenkins cookbook testing server with all defaults
 
 ```ruby
 run_list *%w[
