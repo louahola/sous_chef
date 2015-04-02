@@ -120,7 +120,7 @@ sous_chef: {
   cookbooks: [
     {
       cookbook_name: 'sous_chef',
-      cookbook_url: '<replace with github clone url>',
+      cookbook_url: 'git@github.com:commercehub-oss/sous_chef.git',
       notification: {
         email: {
           maintainers_email: 'email@example.com'
@@ -139,7 +139,7 @@ sous_chef: {
   cookbooks: [
     {
       cookbook_name: 'sous_chef',
-      cookbook_url: '<replace with github clone url>',
+      cookbook_url: 'git@github.com:commercehub-oss/sous_chef.git',
       notification: {
         email: {
           maintainers_email: 'email@example.com'
@@ -162,7 +162,7 @@ default_attributes(
         cookbooks: [
         {
             cookbook_name: 'sous_chef',
-            cookbook_url: '<replace with github clone url>',
+            cookbook_url: 'git@github.com:commercehub-oss/sous_chef.git',
             triggers: {
                 poll_scm: {
                     schedule: '*/5 * * * *'
@@ -182,7 +182,7 @@ sous_chef: {
   cookbooks: [
     {
       cookbook_name: 'sous_chef',
-      cookbook_url: '<replace with github clone url>',
+      cookbook_url: 'git@github.com:commercehub-oss/sous_chef.git',
       notification: {
         email: {
           maintainers_email: 'email@example.com'

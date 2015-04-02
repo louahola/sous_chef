@@ -7,7 +7,7 @@ default_attributes(
     cookbooks: [
       {
         cookbook_name: 'sous_chef',
-        cookbook_url: '',
+        cookbook_url: 'git@github.com:commercehub-oss/sous_chef.git',
         notification: {
           email: {
             enabled: false,
