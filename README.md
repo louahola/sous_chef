@@ -51,6 +51,8 @@ In addition to configuring the jenkins server with everything needed to start co
 This cookbook stresses convention over configuration.  There is a default job structure including defaults for
 many of the configuration options.  These defaults are designed to be sane and reasonable, but may be overridden as needed.  Keep in mind this cookbook makes assumptions on how the steps should execute and run by default.  The default setup for each cookbook job can be found in the `default['sous_chef']['default_cookbook']` attribute, and is also described in the Attributes section below.  Refer to the [Role File Examples](#role-file-examples) for an idea of how this functions.
 
+Refer to the wiki for more information and [advanced usage:](https://github.com/commercehub-oss/sous_chef/wiki/Advanced-Usage)
+
 Pre-Requisites
 --------------
 ### SSH Keys for Git Access
