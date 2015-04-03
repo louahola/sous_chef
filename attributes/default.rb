@@ -67,6 +67,10 @@ default['sous_chef']['default_cookbook'] =
           enabled: true,
           command: 'bundle exec kitchen test'
         },
+        version: {
+          enabled: false,
+          command: 'thor version:bump patch'
+        },
         upload_cookbook: {
           enabled: true,
           command: 'rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'

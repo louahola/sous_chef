@@ -150,59 +150,6 @@ attribute 'sous_chef/default_cookbook',
   :display_name => 'Default Cookbook',
   :description => 'The cookbook template all cookbooks will be merged with',
   :type => 'hash',
-  :required => 'required',
-  :default => {
-    cookbook_name: 'cookbook_name',
-    cookbook_url: 'cookbook_url',
-    notification: {
-      email: {
-        enabled: true,
-        maintainers_email: 'email@example.com'
-      },
-      hipchat: {
-        enabled: false,
-        hipchat_room: '',
-        notifyStarted: false,
-        notifySuccess: true,
-        notifyAborted: true,
-        notifyNotBuilt: false,
-        notifyUnstable: true,
-        notifyFailure: true,
-        notifyBackToNormal: true,
-        startJobMessage: '',
-        completeJobMessage: ''
-      }
-    },
-    triggers: {
-      poll_scm: {
-        enabled: true,
-        schedule: '*/1 * * * *'
-      }
-    },
-    steps: {
-      bundle: {
-        enabled: true,
-        command: 'bundle install --path vendor/bundle'
-      },
-      rubocop: {
-        enabled: true,
-        command: 'bundle exec rubocop'
-      },
-      foodcritic: {
-        enabled: true,
-        command: 'bundle exec foodcritic . -f any'
-      },
-      test_kitchen: {
-        enabled: true,
-        command: 'bundle exec kitchen test'
-      },
-      upload_cookbook: {
-        enabled: true,
-        command: 'rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'
-          knife cookbook upload replace_with_cookbook --cookbook-path . --freeze
-          rm -rf replace_with_cookbook'
-      }
-    }
-  }
+  :required => 'required'
 
 # rubocop:enable Style/HashSyntax, Style/AlignParameters
