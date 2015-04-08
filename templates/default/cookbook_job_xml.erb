@@ -7,11 +7,17 @@
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
+    <% if @private_keys.empty? %>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url><%= @cookbook_url %></url>
+      </hudson.plugins.git.UserRemoteConfig>
+    <% else %>
     <% @private_keys.each do |credential| %>
       <hudson.plugins.git.UserRemoteConfig>
         <url><%= @cookbook_url %></url>
         <credentialsId><%= credential['id'] %></credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
+    <% end %>
     <% end %>
     </userRemoteConfigs>
     <branches>
