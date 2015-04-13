@@ -20,6 +20,66 @@
 ## sous_chef
 default['sous_chef']['cookbooks'] = []
 default['sous_chef']['merged_cookbooks'] = []
+default['sous_chef']['merged_chef_repos'] = []
+default['sous_chef']['manage_chef_repo'] = false
+
+default['sous_chef']['default_chef_repo'] =
+    {
+      chef_repo_name: '',
+      chef_repo_url: '',
+      notification: {
+        email: {
+          enabled: true,
+          maintainers_email: 'email@example.com'
+        },
+        hipchat: {
+          enabled: false,
+          hipchat_room: '',
+          notifyStarted: false,
+          notifySuccess: true,
+          notifyAborted: true,
+          notifyNotBuilt: false,
+          notifyUnstable: true,
+          notifyFailure: true,
+          notifyBackToNormal: true,
+          startJobMessage: '',
+          completeJobMessage: ''
+        }
+      },
+      triggers: {
+        poll_scm: {
+          enabled: true,
+          schedule: '*/1 * * * *'
+        }
+      },
+      steps: {
+        data_bags: {
+          enabled: true,
+          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep data_bags | while read line ; do
+                      BAG=$(echo $line | cut -d / -f2)
+                      echo knife data bag from file $BAG $line
+                    done"
+        },
+        environments: {
+          enabled: true,
+          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep environments | while read line ; do
+                        echo knife environment from file $line
+                      done"
+        },
+        roles: {
+          enabled: true,
+          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep roles | while read line ; do
+                        echo knife role from file $line
+                      done"
+        },
+        cookbooks: {
+          enabled: true,
+          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep cookbooks | while read line ; do
+                        echo knife cookbook from file $line
+                      done"
+        }
+      }
+    }
 
 default['sous_chef']['default_cookbook'] =
     {

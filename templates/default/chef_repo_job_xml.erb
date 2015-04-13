@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+    <% if @private_keys.empty? %>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url><%= @chef_repo_url %></url>
+      </hudson.plugins.git.UserRemoteConfig>
+    <% else %>
+    <% @private_keys.each do |credential| %>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url><%= @cookbook_url %></url>
+        <credentialsId><%= credential['id'] %></credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    <% end %>
+    <% end %>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <% if @triggers['poll_scm']['enabled'] %>
+    <hudson.triggers.SCMTrigger>
+      <spec><%= @triggers['poll_scm']['schedule'] %></spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+    <% end %>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <% @steps.each do |step, config| %>
+      <% if config['enabled'] %>
+      <hudson.tasks.Shell>
+          <command><%= config['command'] %></command>
+      </hudson.tasks.Shell>
+      <% end %>
+    <% end %>
+  </builders>
+  <publishers>
+    <% if @notification['email']['enabled'] %>
+    <hudson.tasks.Mailer plugin="mailer@1.11">
+      <recipients><%= @notification['email']['maintainers_email'] %></recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <% end %>
+    <% if @notification['hipchat']['enabled'] %>
+    <jenkins.plugins.hipchat.HipChatNotifier plugin="hipchat@0.1.9">
+      <token><%= node['sous_chef']['plugins']['hipchat']['auth_token'] %></token>
+      <room><%= @notification['hipchat']['hipchat_room'] %></room>
+      <startNotification><%= @notification['hipchat']['notifyStarted'] %></startNotification>
+      <notifySuccess><%= @notification['hipchat']['notifySuccess'] %></notifySuccess>
+      <notifyAborted><%= @notification['hipchat']['notifyAborted'] %></notifyAborted>
+      <notifyNotBuilt><%= @notification['hipchat']['notifyNotBuilt'] %></notifyNotBuilt>
+      <notifyUnstable><%= @notification['hipchat']['notifyUnstable'] %></notifyUnstable>
+      <notifyFailure><%= @notification['hipchat']['notifyFailure'] %></notifyFailure>
+      <notifyBackToNormal><%= @notification['hipchat']['notifyBackToNormal'] %></notifyBackToNormal>
+      <startJobMessage><%= @notification['hipchat']['startJobMessage'] %></startJobMessage>
+      <completeJobMessage><%= @notification['hipchat']['completeJobMessage'] %></completeJobMessage>
+    </jenkins.plugins.hipchat.HipChatNotifier>
+    <% end %>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+  </buildWrappers>
+</project>

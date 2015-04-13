@@ -4,6 +4,19 @@ run_list %w(
   recipe[sous_chef::server])
 default_attributes(
   sous_chef: {
+    manage_chef_repo: true,
+    chef_repos: [
+      {
+        chef_repo_name: 'chef_repo',
+        chef_repo_url: 'https://git.nexus.commercehub.com/lzarou/test_chef_repo.git',
+        notification: {
+          email: {
+            enabled: true,
+            maintainers_email: 'email@example.com'
+          }
+        }
+      }
+    ],
     cookbooks: [
       {
         cookbook_name: 'sous_chef',

@@ -50,5 +50,18 @@ node['sous_chef']['cookbooks'].each do |cookbook|
   node.default['sous_chef']['merged_cookbooks'].push(merged_cookbook)
 end
 
+# Cycle through all the chef repos and merge with default chef repo setup
+# Add result to merged_chef_repos array for use later when setting up job steps
+node['sous_chef']['chef_repos'].each do |chef_repo|
+  default_chef_repo = node['sous_chef']['default_chef_repo'].to_hash
+
+  configured_repo = chef_repo
+
+  merged_repo = Chef::Mixin::DeepMerge.deep_merge(configured_repo, default_chef_repo)
+
+  node.default['sous_chef']['merged_chef_repos'].push(merged_repo)
+end
+
 ## Setup Jobs
 include_recipe 'sous_chef::_cookbook_job'
+include_recipe 'sous_chef::_chef_repo_job' if node['sous_chef']['manage_chef_repo']
