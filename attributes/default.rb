@@ -75,7 +75,8 @@ default['sous_chef']['default_chef_repo'] =
         cookbooks: {
           enabled: true,
           command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep cookbooks | while read line ; do
-                        echo knife cookbook from file $line
+                        COOKBOOK=$(echo $line | cut -d / -f2)
+                        echo knife cookbook upload $COOKBOOK -o $line
                       done"
         }
       }

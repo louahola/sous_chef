@@ -8,7 +8,7 @@ default_attributes(
     chef_repos: [
       {
         chef_repo_name: 'chef_repo',
-        chef_repo_url: 'https://git.nexus.commercehub.com/lzarou/test_chef_repo.git',
+        chef_repo_url: '',
         notification: {
           email: {
             enabled: true,
