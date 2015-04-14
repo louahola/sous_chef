@@ -14,7 +14,7 @@
     <% else %>
     <% @private_keys.each do |credential| %>
       <hudson.plugins.git.UserRemoteConfig>
-        <url><%= @cookbook_url %></url>
+        <url><%= @chef_repo_url %></url>
         <credentialsId><%= credential['id'] %></credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
     <% end %>
