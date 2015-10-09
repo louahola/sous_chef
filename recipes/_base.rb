@@ -28,11 +28,12 @@ gem_package 'rake'
 gem_package 'thor'
 gem_package 'thor-scmversion'
 
-# Install new version of ruby
+# Install new version of ruby. Key assumes that ubuntu version 14.04 is being used.
+# Visit brightbox apt repo at https://launchpad.net/~brightbox/+archive/ubuntu/ruby-ng for other ubuntu version keys
 apt_repository 'brightbox-ruby-ng' do
   uri 'http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu'
-  distribution node['lsb']['codename']
   components   ["main"]
+  distribution node['lsb']['codename']
   keyserver    "keyserver.ubuntu.com"
   key          "C3173AA6"
   action :add
