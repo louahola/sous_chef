@@ -21,10 +21,24 @@ include_recipe 'apt'
 include_recipe 'build-essential::default'
 include_recipe 'git::default'
 
-package 'ruby1.9.3'
 package 'vagrant'
 package 'zlib1g-dev'
 gem_package 'bundler'
 gem_package 'rake'
 gem_package 'thor'
 gem_package 'thor-scmversion'
+
+# Install new version of ruby. Key assumes that ubuntu version 14.04 is being used.
+# Visit brightbox apt repo at https://launchpad.net/~brightbox/+archive/ubuntu/ruby-ng for other ubuntu version keys
+apt_repository 'brightbox-ruby-ng' do
+  uri 'http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu'
+  components   ["main"]
+  distribution node['lsb']['codename']
+  keyserver    "keyserver.ubuntu.com"
+  key          "C3173AA6"
+  action :add
+end
+
+apt_package 'ruby2.2' do
+  action :install
+end
