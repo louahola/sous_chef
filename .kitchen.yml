@@ -20,15 +20,15 @@ suites:
             cookbooks: [
               {
                 cookbook_name: 'sous_chef',
-                cookbook_url: 'https://github.com/commercehub-oss/sous_chef.git',
+                cookbook_url: 'https://git.nexus.commercehub.com/lzarou/sous_chef.git',
                 notification: {
                   email: {
                     enabled: false,
-                    maintainers_email: 'email@example.com'
+                    maintainers_email: 'bcarr@commercehub.com'
                   },
                   hipchat: {
                     enabled: false,
-                    hipchat_room: 'Chef'
+                    hipchat_room: 'Brian Carr'
                   }
                 },
                 steps: {
