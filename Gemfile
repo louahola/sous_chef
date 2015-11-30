@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'berkshelf', '= 3.2.3'
 gem 'berkshelf-api-client', '= 1.2.1'
-gem 'foodcritic'
+gem 'foodcritic', '= 4.0.0'
 gem 'serverspec'
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
