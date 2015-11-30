@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf'
+gem 'berkshelf', '= 3.2.3'
+gem 'berkshelf-api-client', '= 1.2.1'
 gem 'foodcritic'
 gem 'serverspec'
 gem 'test-kitchen'
