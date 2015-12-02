@@ -22,7 +22,6 @@ include_recipe 'build-essential::default'
 include_recipe 'git::default'
 include_recipe 'chef-dk::default'
 
-package 'ruby1.9.3'
 package 'vagrant'
 package 'zlib1g-dev'
 gem_package 'bundler'
