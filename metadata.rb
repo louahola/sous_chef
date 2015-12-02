@@ -10,6 +10,7 @@ depends 'jenkins'
 depends 'git'
 depends 'build-essential'
 depends 'apt'
+depends 'chef-dk'
 
 # rubocop:disable Style/HashSyntax, Style/AlignParameters
 
