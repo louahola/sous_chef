@@ -7,10 +7,10 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version IO.read(File.join(File.dirname(__FILE__), 'VERSION')) rescue '0.1.0'
 
 depends 'jenkins'
+depends 'chef-dk'
 depends 'git'
 depends 'build-essential'
 depends 'apt'
-depends 'chef-dk'
 
 # rubocop:disable Style/HashSyntax, Style/AlignParameters
 
