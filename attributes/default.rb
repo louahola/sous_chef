@@ -114,19 +114,19 @@ default['sous_chef']['default_cookbook'] =
       steps: {
         bundle: {
           enabled: true,
-          command: 'bundle install --path vendor/bundle'
+          command: 'chef gem install kitchen-vsphere'
         },
         rubocop: {
           enabled: true,
-          command: 'bundle exec rubocop'
+          command: 'rubocop'
         },
         foodcritic: {
           enabled: true,
-          command: 'bundle exec foodcritic . -f any'
+          command: 'foodcritic . -f any'
         },
         test_kitchen: {
           enabled: true,
-          command: 'bundle exec kitchen test'
+          command: 'kitchen test'
         },
         version: {
           enabled: false,

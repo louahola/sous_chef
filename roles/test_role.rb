@@ -29,16 +29,16 @@ default_attributes(
         },
         steps: {
           bundle: {
-            command: 'echo bundle install --path vendor/bundle'
+            command: 'chef gem install kitchen-vsphere'
           },
           rubocop: {
-            command: 'echo bundle exec rubocop'
+            command: 'exec rubocop'
           },
           foodcritic: {
-            command: 'echo bundle exec foodcritic . -f any'
+            command: 'exec foodcritic . -f any'
           },
           test_kitchen: {
-            command: 'echo bundle exec kitchen test'
+            command: 'exec kitchen test'
           },
           upload_cookbook: {
             command: 'echo rm -rf replace_with_cookbook

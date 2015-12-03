@@ -24,7 +24,5 @@ include_recipe 'chef-dk::default'
 
 package 'vagrant'
 package 'zlib1g-dev'
-gem_package 'bundler'
-gem_package 'rake'
 gem_package 'thor'
 gem_package 'thor-scmversion'
