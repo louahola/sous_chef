@@ -114,7 +114,7 @@ default['sous_chef']['default_cookbook'] =
       steps: {
         bundle: {
           enabled: true,
-          command: 'chef gem install kitchen-vsphere'
+          command: 'chef exec bundle install'
         },
         rubocop: {
           enabled: true,

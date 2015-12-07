@@ -1,12 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf', '= 3.2.3'
-gem 'berkshelf-api-client', '= 1.2.1'
-gem 'foodcritic', '= 4.0.0'
 gem 'serverspec'
-gem 'test-kitchen'
-gem 'kitchen-vagrant'
 gem 'busser-serverspec'
-gem 'rubocop'
 gem 'thor'
 gem 'thor-scmversion'

@@ -24,11 +24,11 @@ suites:
                 notification: {
                   email: {
                     enabled: false,
-                    maintainers_email: 'bcarr@commercehub.com'
+                    maintainers_email: 'email@example.com'
                   },
                   hipchat: {
                     enabled: false,
-                    hipchat_room: 'Brian Carr'
+                    hipchat_room: 'Chef'
                   }
                 },
                 steps: {

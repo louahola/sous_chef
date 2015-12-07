@@ -29,7 +29,7 @@ default_attributes(
         },
         steps: {
           bundle: {
-            command: 'chef gem install kitchen-vsphere'
+            command: 'chef exec bundle install'
           },
           rubocop: {
             command: 'exec rubocop'
