@@ -1,12 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf'
-gem 'foodcritic'
 gem 'serverspec'
-gem 'test-kitchen'
-gem 'kitchen-vagrant'
 gem 'busser-serverspec'
-gem 'rubocop'
 gem 'thor'
 gem 'thor-scmversion'
-gem 'nio4r', '1.1.1'

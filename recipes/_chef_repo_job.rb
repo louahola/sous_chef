@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: sous_chef
-# Recipe::_base
+# Recipe::_chef_repo_job
 #
 # Copyright 2015 CommerceHub
 #
@@ -17,12 +17,21 @@
 # limitations under the License.
 #
 
-include_recipe 'apt'
-include_recipe 'build-essential::default'
-include_recipe 'git::default'
-include_recipe 'chef-dk::default'
+node['sous_chef']['merged_chef_repos'].each do |chef_repo|
+  xml = File.join(Chef::Config['file_cache_path'], "#{chef_repo['chef_repo_name']}.xml")
 
-package 'vagrant'
-package 'zlib1g-dev'
-gem_package 'thor'
-gem_package 'thor-scmversion'
+  template xml do
+    source 'chef_repo_job_xml.erb'
+    variables(
+      chef_repo_url: chef_repo['chef_repo_url'],
+      notification: chef_repo['notification'],
+      triggers: chef_repo['triggers'],
+      steps: chef_repo['steps'],
+      private_keys: node['sous_chef']['jenkins_private_key_credentials']
+    )
+  end
+
+  jenkins_job chef_repo['chef_repo_name'] do
+    config xml
+  end
+end

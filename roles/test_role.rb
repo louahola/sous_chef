@@ -4,6 +4,19 @@ run_list %w(
   recipe[sous_chef::server])
 default_attributes(
   sous_chef: {
+    manage_chef_repo: true,
+    chef_repos: [
+      {
+        chef_repo_name: 'chef_repo',
+        chef_repo_url: '',
+        notification: {
+          email: {
+            enabled: true,
+            maintainers_email: 'email@example.com'
+          }
+        }
+      }
+    ],
     cookbooks: [
       {
         cookbook_name: 'sous_chef',
@@ -16,16 +29,16 @@ default_attributes(
         },
         steps: {
           bundle: {
-            command: 'echo bundle install --path vendor/bundle'
+            command: 'chef exec bundle install'
           },
           rubocop: {
-            command: 'echo bundle exec rubocop'
+            command: 'exec rubocop'
           },
           foodcritic: {
-            command: 'echo bundle exec foodcritic . -f any'
+            command: 'exec foodcritic . -f any'
           },
           test_kitchen: {
-            command: 'echo bundle exec kitchen test'
+            command: 'exec kitchen test'
           },
           upload_cookbook: {
             command: 'echo rm -rf replace_with_cookbook
