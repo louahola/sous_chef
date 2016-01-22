@@ -114,19 +114,19 @@ default['sous_chef']['default_cookbook'] =
       steps: {
         bundle: {
           enabled: true,
-          command: 'chef exec bundle install'
+          command: 'chef exec bundle install --path vendor/bundle'
         },
         rubocop: {
           enabled: true,
-          command: 'rubocop'
+          command: 'chef exec bundle exec rubocop'
         },
         foodcritic: {
           enabled: true,
-          command: 'foodcritic . -f any'
+          command: 'chef exec bundle exec foodcritic . -f any'
         },
         test_kitchen: {
           enabled: true,
-          command: 'kitchen test'
+          command: 'chef exec bundle exec kitchen test'
         },
         version: {
           enabled: false,
