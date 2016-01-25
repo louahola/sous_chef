@@ -25,6 +25,8 @@ include_recipe 'git::default'
 include_recipe 'chef-dk::default'
 
 package 'vagrant'
+package 'ruby-dev'
 package 'zlib1g-dev'
+package 'liblzma-dev'
 gem_package 'thor'
 gem_package 'thor-scmversion'
