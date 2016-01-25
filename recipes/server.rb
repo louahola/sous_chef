@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'jenkins::master'
 include_recipe 'sous_chef::_base'
 include_recipe 'sous_chef::_plugins'
 include_recipe 'sous_chef::_chef_config' if node['sous_chef']['chef']['manage_chef_config']
