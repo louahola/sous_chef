@@ -18,6 +18,8 @@
 #
 
 include_recipe 'apt'
+include_recipe 'jenkins::java'
+include_recipe 'jenkins::master'
 include_recipe 'build-essential::default'
 include_recipe 'git::default'
 include_recipe 'chef-dk::default'

@@ -18,6 +18,7 @@
 #
 
 ## sous_chef
+default['sous_chef']['chef_repos'] = []
 default['sous_chef']['cookbooks'] = []
 default['sous_chef']['merged_cookbooks'] = []
 default['sous_chef']['merged_chef_repos'] = []

@@ -23,7 +23,7 @@ Vagrant.configure('2') do |config|
     box1.vm.hostname = 'souschef'
     box1.vm.network :private_network, ip: '192.168.24.122'
     Vagrant.has_plugin?('vagrant-hostmanager') ? box1.hostmanager.aliases = %w(server alias) : ''
-    box1.omnibus.chef_version = '11.16.4'
+    box1.omnibus.chef_version = '12.6.0'
 
     box1.vm.provision 'chef_solo' do |chef|
       chef.cookbooks_path = './cookbooks'
