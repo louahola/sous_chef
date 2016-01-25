@@ -25,122 +25,122 @@ default['sous_chef']['merged_chef_repos'] = []
 default['sous_chef']['manage_chef_repo'] = false
 
 default['sous_chef']['default_chef_repo'] =
-    {
-      chef_repo_name: '',
-      chef_repo_url: '',
-      notification: {
-        email: {
-          enabled: true,
-          maintainers_email: 'email@example.com'
-        },
-        hipchat: {
-          enabled: false,
-          hipchat_room: '',
-          notifyStarted: false,
-          notifySuccess: true,
-          notifyAborted: true,
-          notifyNotBuilt: false,
-          notifyUnstable: true,
-          notifyFailure: true,
-          notifyBackToNormal: true,
-          startJobMessage: '',
-          completeJobMessage: ''
-        }
+  {
+    chef_repo_name: '',
+    chef_repo_url: '',
+    notification: {
+      email: {
+        enabled: true,
+        maintainers_email: 'email@example.com'
       },
-      triggers: {
-        poll_scm: {
-          enabled: true,
-          schedule: '*/1 * * * *'
-        }
+      hipchat: {
+        enabled: false,
+        hipchat_room: '',
+        notifyStarted: false,
+        notifySuccess: true,
+        notifyAborted: true,
+        notifyNotBuilt: false,
+        notifyUnstable: true,
+        notifyFailure: true,
+        notifyBackToNormal: true,
+        startJobMessage: '',
+        completeJobMessage: ''
+      }
+    },
+    triggers: {
+      poll_scm: {
+        enabled: true,
+        schedule: '*/1 * * * *'
+      }
+    },
+    steps: {
+      data_bags: {
+        enabled: true,
+        command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep data_bags | while read line ; do
+                    BAG=$(echo $line | cut -d / -f2)
+                    echo knife data bag from file $BAG $line
+                  done"
       },
-      steps: {
-        data_bags: {
-          enabled: true,
-          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep data_bags | while read line ; do
-                      BAG=$(echo $line | cut -d / -f2)
-                      echo knife data bag from file $BAG $line
+      environments: {
+        enabled: true,
+        command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep environments | while read line ; do
+                      echo knife environment from file $line
                     done"
-        },
-        environments: {
-          enabled: true,
-          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep environments | while read line ; do
-                        echo knife environment from file $line
-                      done"
-        },
-        roles: {
-          enabled: true,
-          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep roles | while read line ; do
-                        echo knife role from file $line
-                      done"
-        },
-        cookbooks: {
-          enabled: true,
-          command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep cookbooks | while read line ; do
-                        COOKBOOK=$(echo $line | cut -d / -f2)
-                        echo knife cookbook upload $COOKBOOK -o $line
-                      done"
-        }
+      },
+      roles: {
+        enabled: true,
+        command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep roles | while read line ; do
+                      echo knife role from file $line
+                    done"
+      },
+      cookbooks: {
+        enabled: true,
+        command: "git diff-tree --no-commit-id --name-only -r $(git log --oneline -n 1 | awk '{print $1}') | grep cookbooks | while read line ; do
+                      COOKBOOK=$(echo $line | cut -d / -f2)
+                      echo knife cookbook upload $COOKBOOK -o $line
+                    done"
       }
     }
+  }
 
 default['sous_chef']['default_cookbook'] =
-    {
-      cookbook_name: 'cookbook_name',
-      cookbook_url: 'cookbook_url',
-      notification: {
-        email: {
-          enabled: true,
-          maintainers_email: 'email@example.com'
-        },
-        hipchat: {
-          enabled: false,
-          hipchat_room: '',
-          notifyStarted: false,
-          notifySuccess: true,
-          notifyAborted: true,
-          notifyNotBuilt: false,
-          notifyUnstable: true,
-          notifyFailure: true,
-          notifyBackToNormal: true,
-          startJobMessage: '',
-          completeJobMessage: ''
-        }
+  {
+    cookbook_name: 'cookbook_name',
+    cookbook_url: 'cookbook_url',
+    notification: {
+      email: {
+        enabled: true,
+        maintainers_email: 'email@example.com'
       },
-      triggers: {
-        poll_scm: {
-          enabled: true,
-          schedule: '*/1 * * * *'
-        }
+      hipchat: {
+        enabled: false,
+        hipchat_room: '',
+        notifyStarted: false,
+        notifySuccess: true,
+        notifyAborted: true,
+        notifyNotBuilt: false,
+        notifyUnstable: true,
+        notifyFailure: true,
+        notifyBackToNormal: true,
+        startJobMessage: '',
+        completeJobMessage: ''
+      }
+    },
+    triggers: {
+      poll_scm: {
+        enabled: true,
+        schedule: '*/1 * * * *'
+      }
+    },
+    steps: {
+      bundle: {
+        enabled: true,
+        command: 'chef exec bundle install --path vendor/bundle'
       },
-      steps: {
-        bundle: {
-          enabled: true,
-          command: 'chef exec bundle install --path vendor/bundle'
-        },
-        rubocop: {
-          enabled: true,
-          command: 'chef exec bundle exec rubocop'
-        },
-        foodcritic: {
-          enabled: true,
-          command: 'chef exec bundle exec foodcritic . -f any'
-        },
-        test_kitchen: {
-          enabled: true,
-          command: 'chef exec bundle exec kitchen test'
-        },
-        version: {
-          enabled: false,
-          command: 'thor version:bump patch'
-        },
-        upload_cookbook: {
-          enabled: true,
-          command: 'rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'
-          knife cookbook upload replace_with_cookbook --cookbook-path . --freeze
-          rm -rf replace_with_cookbook'
-        }
+      rubocop: {
+        enabled: true,
+        command: 'chef exec bundle exec rubocop'
+      },
+      foodcritic: {
+        enabled: true,
+        command: 'chef exec bundle exec foodcritic . -f any'
+      },
+      test_kitchen: {
+        enabled: true,
+        command: 'chef exec bundle exec kitchen test'
+      },
+      version: {
+        enabled: false,
+        command: 'thor version:bump patch'
+      },
+      upload_cookbook: {
+        enabled: true,
+        command: 'rsync -avzq . ./replace_with_cookbook --exclude replace_with_cookbook --exclude \'vendor\'
+        knife cookbook upload replace_with_cookbook --cookbook-path . --freeze
+        rm -rf replace_with_cookbook'
       }
     }
+  }
 
 # General sous_chef properties
 default['sous_chef']['master_executors'] = 4
